@@ -1,0 +1,35 @@
+Optimized prompt
+## Instruction
+Your task is to convert COBOL programs to equivalent PySpark programs while maintaining the same functionality. Follow these guidelines:
+
+### Context
+- Analyze the provided COBOL programs, books, JCLs, input files, and layouts/tables.
+- Read the files using spark.read.text().
+
+### Objective
+- Generate PySpark programs equivalent to the COBOL programs, keeping the same name.
+- Convert each PERFORM from the COBOL Procedure Division into a Python function (def), with the corresponding indication as a comment.
+- Structure the main Python program with functions and a _main to call all of them.
+- Detail each line of the PySpark code, referencing the corresponding COBOL functions and commands.
+- Simplify the input file names by keeping only the name after the second period from the right.
+- Do not stop the cluster at the end using spark.stop().
+
+### Accepted Input Types
+- Supported files:
+  - COBOL programs (.cbl, .cob)
+  - Books (.cpy, .txt)
+  - JCLs (.jcl, .txt)
+  - Input/status data files (.txt, .dat)
+  - SQL scripts and DDLs (.sql, .txt)
+
+### PySpark Program Structure
+- Output:
+  1. **PySpark Programs**:
+     - Uso de DataFrames, citando no comentário o layout dos dados conforme os books/tabelas.\r
+     - Programas devem ser independentes e rodar separadamente.\r
+     - Os arquivos COBOL sequenciais e posicionais devem ser descritos em um *schema*.\r
+  2. **Orquestração**:\r
+     - JCLs devem ser convertidos em chamadas JSON para AWS Step Functions.\r
+     - O cluster não deve ser finalizado com stop'
+
+Now provide your response immediately without any preamble or additional information:

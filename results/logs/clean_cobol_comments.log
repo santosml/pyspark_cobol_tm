@@ -1,0 +1,8 @@
+[OK] Gerado: results\transform\program2_COBOL_clean.txt
+[Resumo] Linhas totais: 273 | Removidas: 16 | Mantidas: 257
+[Exemplos removidos (até 5)]:
+  linha 3: 000003*********                                                  
+  linha 4: 000004********* ATUALIZA SALDO DE CLIENTES ATIVOS                
+  linha 5: 000005********* FILE01 CLIENTES COM SALDO ATUALIZADO             
+  linha 6: 000006********* FILE02 CREDITO DE SALDO                          
+  linha 7: 000007********* FILE03 DEBITO DE SALDO                           

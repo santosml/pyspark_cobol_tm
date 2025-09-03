@@ -1,0 +1,51 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "STEP05",
+        "exec": "PGM=IDCAMS",
+        "pgm": "IDCAMS",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* DEFINE GENERATIONDATAGROUP - (NAME(AWS.M2.CARDDEMO.DALYREJS) - LIMIT(5) - SCRATCH - ) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      }
+    ]
+  },
+  "programs": {},
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "STEP1",
+        "exec": "PGM=DFHCSDUP,REGION=0M, PARM='CSD(READWRITE),PAGESIZE(60),NOCOMPAT'",
+        "pgm": "DFHCSDUP",
+        "proc": null,
+        "parm": "'CSD(READWRITE)",
+        "dd": [
+          {
+            "ddname": "STEPLIB",
+            "raw": "DSN=OEM.CICSTS.V05R06M0.CICS.SDFHLOAD,DISP=SHR",
+            "dsn": "OEM.CICSTS.V05R06M0.CICS.SDFHLOAD",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "DFHCSD",
+            "raw": "UNIT=SYSDA,DISP=SHR,DSN=OEM.CICSTS.DFHCSD",
+            "dsn": "OEM.CICSTS.DFHCSD",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "OUTDD",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          },
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "*,SYMBOLS=JCLONLY */********************************************************************/ */*  CARDDEMO CICS DEFINITIONS                                       */ */********************************************************************/ * NOTE: INSTALL GROUP(CARDDEMO) - CEDA IN G(CARDDEMO)                * *     IF YOU ARE RERUNNING THIS, UNCOMMENT THE DELETE COMMAND. * * * START CARDDEMO RESOURCES: * * DELETE GROUP(CARDDEMO)",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "COBOL",
+        "cobol_programs": [
+          "DFHCSDUP"
+        ]
+      }
+    ]
+  },
+  "programs": {
+    "DFHCSDUP": {
+      "found": false,
+      "path": null,
+      "copy": [],
+      "sql_include": [],
+      "reads": [],
+      "writes": []
+    }
+  },
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

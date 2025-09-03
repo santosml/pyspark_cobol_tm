@@ -1,0 +1,73 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "OPCIFIL",
+        "exec": "PGM=SDSF",
+        "pgm": "SDSF",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "ISFOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          },
+          {
+            "ddname": "CMDOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          },
+          {
+            "ddname": "ISFIN",
+            "raw": "* /F CICSAWSA,'CEMT SET FIL(TRANSACT ) OPE' /F CICSAWSA,'CEMT SET FIL(CCXREF ) OPE' /F CICSAWSA,'CEMT SET FIL(ACCTDAT ) OPE' /F CICSAWSA,'CEMT SET FIL(CXACAIX ) OPE' /F CICSAWSA,'CEMT SET FIL(USRSEC ) OPE' /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "COBOL",
+        "cobol_programs": [
+          "SDSF"
+        ]
+      }
+    ]
+  },
+  "programs": {
+    "SDSF": {
+      "found": false,
+      "path": null,
+      "copy": [],
+      "sql_include": [],
+      "reads": [],
+      "writes": []
+    }
+  },
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

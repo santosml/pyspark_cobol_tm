@@ -1,0 +1,215 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "STEP05R",
+        "exec": "PROC=REPROC, CNTLLIB=AWS.M2.CARDDEMO.CNTL",
+        "pgm": null,
+        "proc": "REPROC",
+        "parm": null,
+        "dd": [],
+        "type": "UNKNOWN",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP05R",
+        "exec": "PGM=SORT",
+        "pgm": "SORT",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SORTIN",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TRANSACT.BKUP(+1)",
+            "dsn": "AWS.M2.CARDDEMO.TRANSACT.BKUP",
+            "member": "+1",
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYMNAMES",
+            "raw": "* TRAN-CARD-NUM,263,16,ZD TRAN-PROC-DT,305,10,CH PARM-START-DATE,C'2022-01-01'                                      //Date PARM-END-DATE,C'2022-07-06'                                        //Date",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* SORT FIELDS=(TRAN-CARD-NUM,A) INCLUDE COND=(TRAN-PROC-DT,GE,PARM-START-DATE,AND, TRAN-PROC-DT,LE,PARM-END-DATE) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          },
+          {
+            "ddname": "SYSOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SORTOUT",
+            "raw": "DISP=(NEW,CATLG,DELETE), UNIT=SYSDA, DCB=(*.SORTIN), SPACE=(CYL,(1,1),RLSE), DSN=AWS.M2.CARDDEMO.TRANSACT.DALY(+1)",
+            "dsn": "AWS.M2.CARDDEMO.TRANSACT.DALY",
+            "member": "+1",
+            "disp": "NEW,CATLG,DELETE",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "output"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP10R",
+        "exec": "PGM=CBTRN03C",
+        "pgm": "CBTRN03C",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "STEPLIB",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.LOADLIB",
+            "dsn": "AWS.M2.CARDDEMO.LOADLIB",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "TRANFILE",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TRANSACT.DALY(+1)",
+            "dsn": "AWS.M2.CARDDEMO.TRANSACT.DALY",
+            "member": "+1",
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "CARDXREF",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "TRANTYPE",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TRANTYPE.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.TRANTYPE.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "TRANCATG",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TRANCATG.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.TRANCATG.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "DATEPARM",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.DATEPARM",
+            "dsn": "AWS.M2.CARDDEMO.DATEPARM",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "TRANREPT",
+            "raw": "DISP=(NEW,CATLG,DELETE), UNIT=SYSDA, DCB=(LRECL=133,RECFM=FB,BLKSIZE=0), SPACE=(CYL,(1,1),RLSE), DSN=AWS.M2.CARDDEMO.TRANREPT(+1) ",
+            "dsn": "AWS.M2.CARDDEMO.TRANREPT",
+            "member": "+1",
+            "disp": "NEW,CATLG,DELETE",
+            "recfm": "FB",
+            "lrecl": "133",
+            "sysin_inline": null,
+            "class": "output"
+          }
+        ],
+        "type": "COBOL",
+        "cobol_programs": [
+          "CBTRN03C"
+        ]
+      }
+    ]
+  },
+  "programs": {
+    "CBTRN03C": {
+      "found": true,
+      "path": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl\\CBTRN03C.cbl",
+      "copy": [],
+      "sql_include": [],
+      "reads": [],
+      "writes": []
+    }
+  },
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

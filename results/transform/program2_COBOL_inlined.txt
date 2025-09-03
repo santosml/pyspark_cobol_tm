@@ -1,0 +1,273 @@
+000001        IDENTIFICATION DIVISION.                           
+000002        PROGRAM-ID.  'PROGRAM2'.                           
+000003*********                                                  
+000004********* ATUALIZA SALDO DE CLIENTES ATIVOS                
+000005********* FILE01 CLIENTES COM SALDO ATUALIZADO             
+000006********* FILE02 CREDITO DE SALDO                          
+000007********* FILE03 DEBITO DE SALDO                           
+000008********* OUTFL1 CLIENTES COM SALDO                        
+000009********* OUTFL2 CLIENTES COM SALDO ZERADO PARA BLOQUEIO   
+000009********* OUTFL3 REGISTROS DE DEBITOS DOS CLIENTES  
+000010*********                                                  
+000011        ENVIRONMENT DIVISION.                              
+000012        CONFIGURATION SECTION.                             
+000013        SOURCE-COMPUTER.  IBM-360.                         
+000014        OBJECT-COMPUTER.  IBM-360.                         
+000015        SPECIAL-NAMES.                                     
+000016            CONSOLE IS CNSL.                               
+000017        INPUT-OUTPUT SECTION.                              
+000018        FILE-CONTROL.                                      
+000019            SELECT FILE01 ASSIGN TO UT-S-DD1.              
+000020            SELECT FILE02 ASSIGN TO UT-S-DD2.              
+000021            SELECT FILE03 ASSIGN TO UT-S-DD3.              
+000022            SELECT OUTFL1 ASSIGN TO UT-S-DD4.         
+000023            SELECT OUTFL2 ASSIGN TO UT-S-DD5.      
+000023            SELECT OUTFL3 ASSIGN TO UT-S-DD6.          
+000024        DATA DIVISION.                                
+000025        FILE SECTION.                                 
+000026        FD  FILE01                                    
+000027            BLOCK CONTAINS 88 RECORDS                 
+000028            RECORD CONTAINS 88 CHARACTERS             
+000029            DATA RECORD IS FILE01-AREA.               
+000030        01  FILE01-AREA.                              
+000031            03 NUM-FILE01          PIC X(10).         
+000032            03 FIRST-NAME-FILE01   PIC X(10).         
+000033            03 LAST-NAME-FILE01    PIC X(10).         
+000034            03 ACCT-BALANCE-FILE01 PIC 9(10).         
+000035            03 FILLER              PIC X(48).         
+000036        FD  FILE02                                    
+000037            BLOCK CONTAINS 88 RECORDS                 
+000038            RECORD CONTAINS 88 CHARACTERS             
+000039            DATA RECORD IS FILE02-AREA.               
+000040        01  FILE02-AREA.                              
+000041            03 NUM-FILE02          PIC X(10).         
+000042            03 FIRST-NAME-FILE02   PIC X(10).         
+000043            03 LAST-NAME-FILE02    PIC X(10).         
+000044            03 ACCT-BALANCE-FILE02 PIC 9(10).          
+000045            03 FILLER              PIC X(48).          
+000046        FD  FILE03                                     
+000047            BLOCK CONTAINS 88 RECORDS                  
+000048            RECORD CONTAINS 88 CHARACTERS              
+000049            DATA RECORD IS FILE03-AREA.                
+000050        01  FILE03-AREA.                               
+000051            03 NUM-FILE03          PIC X(10).          
+000052            03 FIRST-NAME-FILE03   PIC X(10).          
+000053            03 LAST-NAME-FILE03    PIC X(10).          
+000054            03 ACCT-BALANCE-FILE03 PIC 9(10).          
+000055            03 FILLER              PIC X(48).          
+000056        FD  OUTFL1                                     
+000057            BLOCK CONTAINS 88 RECORDS                  
+000058            RECORD CONTAINS 88 CHARACTERS              
+000059            DATA RECORD IS OUTFL1-AREA.                
+000070        01  OUTFL2-AREA.                                         
+000075            03 FILLER              PIC X(98).        
+000066        FD  OUTFL2                                               
+000067            BLOCK CONTAINS 88 RECORDS                            
+000068            RECORD CONTAINS 88 CHARACTERS                        
+000069            DATA RECORD IS OUTFL2-AREA.                          
+000070        01  OUTFL2-AREA.                                         
+000075            03 FILLER              PIC X(98).            
+000066        FD  OUTFL3                                               
+000067            BLOCK CONTAINS 88 RECORDS                            
+000068            RECORD CONTAINS 88 CHARACTERS                        
+000069            DATA RECORD IS OUTFL3-AREA.   
+000070        01  OUTFL3-AREA.                                         
+000075            03 FILLER              PIC X(98).              
+000076        WORKING-STORAGE SECTION.                                 
+000077        77  RECORD-COUNT-FILE01    PIC 9(2) VALUE 0.             
+000078        77  RECORD-COUNT-FILE02    PIC 9(2) VALUE 0.             
+000079        77  RECORD-COUNT-FILE03    PIC 9(2) VALUE 0.             
+000080        77  RECORD-COUNT-OUTFL1    PIC 9(2) VALUE 0.             
+000081        77  RECORD-COUNT-OUTFL2    PIC 9(2) VALUE 0.       
+000081        77  RECORD-COUNT-OUTFL3    PIC 9(2) VALUE 0.        
+000082        77  RECORD-COUNT-LIMIT     PIC 9(2) VALUE 0.             
+000083        77  WK-ACCT-BALANCE        PIC 9(10) VALUE 0.            
+000084            01 WS-CONTROLS.                                      
+000085                05 WS-FILE-STATUS         PIC X(2) VALUE SPACES. 
+000086                05 EOF-FILE01             PIC X VALUE 'N'.       
+000087                05 EOF-FILE02             PIC X VALUE 'N'.       
+000088                05 EOF-FILE03             PIC X VALUE 'N'.         
+000089                                                                   
+000089*       COPY OUTFL1.                                                           
+000060        01  WORK-OUTFL1.                               
+000061            03 NUM-OUTFL1          PIC X(10).          
+000062            03 FIRST-NAME-OUTFL1   PIC X(10).          
+000063            03 LAST-NAME-OUTFL1    PIC X(10).          
+000064            03 ACCT-BALANCE-OUTFL1 PIC 9(10).          
+000065            03 FILLER              PIC X(48). 
+000089*       COPY OUTFL1 REPLACING OUTFL1 BY OUTFL2.
+000060        01  WORK-OUTFL2.                               
+000061            03 NUM-OUTFL2          PIC X(10).          
+000062            03 FIRST-NAME-OUTFL2   PIC X(10).          
+000063            03 LAST-NAME-OUTFL2    PIC X(10).          
+000064            03 ACCT-BALANCE-OUTFL2 PIC 9(10).          
+000065            03 FILLER              PIC X(48). 
+000089*       COPY OUTFL3.
+000060        01  WORK-OUTFL3.                               
+000061            03 NUM-OUTFL3          PIC X(10).          
+000062            03 FIRST-NAME-OUTFL3   PIC X(10).          
+000063            03 LAST-NAME-OUTFL3    PIC X(10).          
+000064            03 ACCT-BALANCE-OUTFL3 PIC 9(10).          
+000065            03 FILLER              PIC X(48). 
+000089                                                                                       
+000090        PROCEDURE DIVISION.                                        
+000091*      ******************************************************      
+000092*      * THE MAIN PARAGRAPH PERFORMS ALL OTHERS AND IS THE  *      
+000093*      * START OF THE PROGRAM LOGIC.                        *      
+000094*      ******************************************************      
+000095        0000-MAIN.                                                 
+000096                                                                   
+000097            PERFORM 0100-INITIALIZE.                               
+000098                                                                   
+000099            PERFORM 0200-PROCESS UNTIL                             
+000100                    EOF-FILE01 EQUAL 'Y' AND                       
+000101                    EOF-FILE02 EQUAL 'Y' AND                       
+000102                    EOF-FILE03 EQUAL 'Y'.                          
+000103                                                                   
+000104            PERFORM 9999-CLOSE-OUT.                                
+000105                                                                   
+000106            DISPLAY '********************'                         
+000107            DISPLAY 'FIM DE PROCESSAMENTO'                         
+000108            DISPLAY 'RECORD READ  FILE01: ' RECORD-COUNT-FILE01    
+000109            DISPLAY 'RECORD READ  FILE02: ' RECORD-COUNT-FILE02    
+000110            DISPLAY 'RECORD READ  FILE03: ' RECORD-COUNT-FILE03  
+000111            DISPLAY 'RECORD WRITE OUTFL1: ' RECORD-COUNT-OUTFL1  
+000112            DISPLAY 'RECORD WRITE OUTFL2: ' RECORD-COUNT-OUTFL2  
+000112            DISPLAY 'RECORD WRITE OUTFL2: ' RECORD-COUNT-OUTFL3  
+000113            DISPLAY 'FIM DE PROCESSAMENTO'                       
+000114            DISPLAY '********************'                       
+000115            STOP RUN.                                            
+000116                                                                 
+000117        0100-INITIALIZE.                                         
+000118            OPEN  INPUT FILE01.                                  
+000119            OPEN  INPUT FILE02.                                  
+000120            OPEN  INPUT FILE03.                                  
+000121            OPEN OUTPUT OUTFL1.                                  
+000122            OPEN OUTPUT OUTFL2.      
+000122            OPEN OUTPUT OUTFL3.                                  
+                            
+000123                                                                 
+000124            PERFORM READ-FILE01.                                 
+000125            PERFORM READ-FILE02.                                 
+000126            PERFORM READ-FILE03.                                 
+000127                                                                 
+000128        0200-PROCESS.                                            
+000129                                                                 
+000130            ADD 1 TO RECORD-COUNT-LIMIT                          
+000131            IF RECORD-COUNT-LIMIT GREATER 50                     
+000132               DISPLAY 'TRAVA LOOPING'                   
+000133               STOP RUN.                                 
+000134                                                         
+000135            IF   NUM-FILE01 LESS NUM-FILE02              
+000136            AND  NUM-FILE01 LESS NUM-FILE03              
+000137                  PERFORM 0400-WRITE-OUTFL1              
+000138                  PERFORM 0230-CHECA-SALDO               
+000139                  PERFORM READ-FILE01                    
+000140                                                         
+000141            ELSE IF   NUM-FILE02 LESS NUM-FILE01         
+000142                  PERFORM READ-FILE02                    
+000143                                                         
+000144            ELSE IF   NUM-FILE03 LESS NUM-FILE01         
+000145                  PERFORM READ-FILE03.                   
+000146                                                         
+000147            IF   NUM-FILE01 EQUAL NUM-FILE02             
+000148                  PERFORM 0210-SOMA-CREDITO              
+000149                  PERFORM READ-FILE02.                   
+000150                                                         
+000151            IF   NUM-FILE01 EQUAL NUM-FILE03             
+000152                  PERFORM 0220-SUBTRAI-DEBITO            
+000153                  PERFORM READ-FILE03.                   
+000154                                                               
+000155        0210-SOMA-CREDITO.                                     
+000156                                                               
+000157                 ADD ACCT-BALANCE-FILE02                       
+000158                  TO WK-ACCT-BALANCE.                          
+000159                                                               
+000160        0220-SUBTRAI-DEBITO.                                   
+000161                                                               
+000162            DISPLAY '0220-SUBTRAI-DEBITO'                      
+000163            DISPLAY 'ACCT-BALANCE-FILE03= ' ACCT-BALANCE-FILE03
+000164            DISPLAY 'WK-ACCT-BALANCE    = ' WK-ACCT-BALANCE.   
+000165            SUBTRACT ACCT-BALANCE-FILE03                       
+000166                FROM WK-ACCT-BALANCE.             
+000166            PERFORM 0400-WRITE-OUTFL3             
+000167            DISPLAY 'APOS               = ' WK-ACCT-BALANCE.   
+000168                                                               
+000169        0230-CHECA-SALDO.                                      
+000170                                                               
+000171            IF ACCT-BALANCE-FILE01 EQUAL ZEROS                 
+000172               PERFORM 0400-WRITE-OUTFL2.                      
+000173                                                               
+000174        READ-FILE01.                                           
+000175                                                               
+000176            IF EOF-FILE01 EQUAL 'N'                    
+000177               READ FILE01                             
+000178               AT END MOVE 'Y' TO EOF-FILE01.          
+000179                                                       
+000180            IF EOF-FILE01 EQUAL 'Y'                    
+000181               MOVE 9999999999                         
+000182                 TO NUM-FILE01                         
+000183            ELSE                                       
+000184               MOVE ACCT-BALANCE-FILE01                
+000185                 TO WK-ACCT-BALANCE                    
+000186               ADD 1 TO RECORD-COUNT-FILE01.           
+000187                                                       
+000188        READ-FILE02.                                   
+000189                                                       
+000190            IF EOF-FILE02 EQUAL 'N'                    
+000191               READ FILE02                             
+000192               AT END MOVE 'Y' TO EOF-FILE02.          
+000193                                                       
+000194            IF EOF-FILE02 EQUAL 'Y'                    
+000195               MOVE 9999999999                         
+000196                 TO NUM-FILE02                         
+000197            ELSE                                       
+000198               ADD 1 TO RECORD-COUNT-FILE02.              
+000199                                                          
+000200        READ-FILE03.                                      
+000201                                                          
+000202            IF EOF-FILE03 EQUAL 'N'                       
+000203               READ FILE03                                
+000204               AT END MOVE 'Y' TO EOF-FILE03.             
+000205                                                          
+000206            IF EOF-FILE03 EQUAL 'Y'                       
+000207               MOVE 9999999999                            
+000208                 TO NUM-FILE03                            
+000209            ELSE                                          
+000210               ADD 1 TO RECORD-COUNT-FILE03.              
+000211                                                          
+000212        0400-WRITE-OUTFL1                                 
+000213                                                          
+000214            MOVE  FILE01-AREA                             
+000215              TO  WORK-OUTFL1.
+000216               MOVE WK-ACCT-BALANCE                       
+000217                 TO ACCT-BALANCE-OUTFL1                   
+000218            WRITE OUTFL1-AREA.                            
+000219            ADD 1 TO RECORD-COUNT-OUTFL1.                 
+000220                                                      
+000221        0400-WRITE-OUTFL2.                     
+000222                                               
+000223            MOVE  FILE01-AREA                  
+000224              TO  WORK-OUTFL2.                 
+000225               MOVE WK-ACCT-BALANCE            
+000226                 TO ACCT-BALANCE-OUTFL2        
+000227            WRITE OUTFL2-AREA.                 
+000228            ADD 1 TO RECORD-COUNT-OUTFL2.      
+000229                    
+000221        0400-WRITE-OUTFL3.                     
+000222                                               
+000223            MOVE  FILE01-AREA                  
+000224              TO  WORK-OUTFL3.                 
+000225               MOVE WK-ACCT-BALANCE            
+000226                 TO ACCT-BALANCE-OUTFL3        
+000227            WRITE OUTFL3-AREA.                 
+000228            ADD 1 TO RECORD-COUNT-OUTFL3.      
+000229                                            
+000230        9999-CLOSE-OUT.                        
+000231            CLOSE FILE01.                      
+000232            CLOSE FILE02.                      
+000233            CLOSE FILE03.                      
+000234            CLOSE OUTFL1.                      
+000235            CLOSE OUTFL2.     
+000235            CLOSE OUTFL3.                 
+000236                                               

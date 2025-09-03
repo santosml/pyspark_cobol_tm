@@ -1,0 +1,194 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "PREDEL",
+        "exec": "PGM=IEFBR14",
+        "pgm": "IEFBR14",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "DD01",
+            "raw": "DSN=AWS.M2.CARDDEMO.USRSEC.PS, DISP=(MOD,DELETE,DELETE)",
+            "dsn": "AWS.M2.CARDDEMO.USRSEC.PS",
+            "member": null,
+            "disp": "MOD,DELETE,DELETE",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "output"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP01",
+        "exec": "PGM=IEBGENER",
+        "pgm": "IEBGENER",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SYSUT1",
+            "raw": "* ADMIN001MARGARET            GOLD                PASSWORDA ADMIN002RUSSELL             RUSSELL             PASSWORDA ADMIN003RAYMOND             WHITMORE            PASSWORDA ADMIN004EMMANUEL            CASGRAIN            PASSWORDA ADMIN005GRANVILLE           LACHAPELLE          PASSWORDA USER0001LAWRENCE            THOMAS              PASSWORDU USER0002AJITH               KUMAR               PASSWORDU USER0003LAURITZ             ALME                PASSWORDU USER0004AVERARDO            MAZZI               PASSWORDU USER0005LEE                 TING                PASSWORDU /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          },
+          {
+            "ddname": "SYSUT2",
+            "raw": "DSN=AWS.M2.CARDDEMO.USRSEC.PS, DISP=(NEW,CATLG,DELETE), DCB=(LRECL=80,RECFM=FB,DSORG=PS,BLKSIZE=0), UNIT=SYSDA,SPACE=(TRK,(10,5),RLSE)",
+            "dsn": "AWS.M2.CARDDEMO.USRSEC.PS",
+            "member": null,
+            "disp": "NEW,CATLG,DELETE",
+            "recfm": "FB",
+            "lrecl": "80",
+            "sysin_inline": null,
+            "class": "output"
+          },
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "DUMMY",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP02",
+        "exec": "PGM=IDCAMS",
+        "pgm": "IDCAMS",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* DELETE                  AWS.M2.CARDDEMO.USRSEC.VSAM.KSDS SET       MAXCC = 0 DEFINE    CLUSTER (NAME(AWS.M2.CARDDEMO.USRSEC.VSAM.KSDS)    - KEYS(8,0)                                 - RECORDSIZE(80,80)                         - REUSE                                     - INDEXED                                   - TRACKS(45,15)                             - FREESPACE(10,15)                          - CISZ(8192))                               - DATA    (NAME(AWS.M2.CARDDEMO.USRSEC.VSAM.KSDS.DAT)) - INDEX   (NAME(AWS.M2.CARDDEMO.USRSEC.VSAM.KSDS.IDX)) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP03",
+        "exec": "PGM=IDCAMS",
+        "pgm": "IDCAMS",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "IN",
+            "raw": "DSN=AWS.M2.CARDDEMO.USRSEC.PS,DISP=SHR",
+            "dsn": "AWS.M2.CARDDEMO.USRSEC.PS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "OUT",
+            "raw": "DSN=AWS.M2.CARDDEMO.USRSEC.VSAM.KSDS,DISP=SHR",
+            "dsn": "AWS.M2.CARDDEMO.USRSEC.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* REPRO INFILE(IN) OUTFILE(OUT) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      }
+    ]
+  },
+  "programs": {},
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

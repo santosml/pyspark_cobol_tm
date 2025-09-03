@@ -1,0 +1,139 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "STEP05",
+        "exec": "PGM=IDCAMS",
+        "pgm": "IDCAMS",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* DELETE AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS - CLUSTER IF MAXCC LE 08 THEN SET MAXCC = 0 /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP10",
+        "exec": "PGM=IDCAMS",
+        "pgm": "IDCAMS",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* DEFINE CLUSTER (NAME(AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS) - CYLINDERS(1 5) - VOLUMES(AWSHJ1 - ) - KEYS(11 0) - RECORDSIZE(300 300) - SHAREOPTIONS(2 3) - ERASE - INDEXED - ) - DATA (NAME(AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS.DATA) - ) - INDEX (NAME(AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS.INDEX) - ) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP15",
+        "exec": "PGM=IDCAMS",
+        "pgm": "IDCAMS",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "ACCTDATA",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.ACCTDATA.PS",
+            "dsn": "AWS.M2.CARDDEMO.ACCTDATA.PS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "ACCTVSAM",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* REPRO INFILE(ACCTDATA) OUTFILE(ACCTVSAM) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      }
+    ]
+  },
+  "programs": {},
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

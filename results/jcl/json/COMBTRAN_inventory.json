@@ -1,0 +1,139 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "STEP05R",
+        "exec": "PGM=SORT",
+        "pgm": "SORT",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SORTIN",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TRANSACT.BKUP(0) DD DISP=SHR, DSN=AWS.M2.CARDDEMO.SYSTRAN(0)",
+            "dsn": "AWS.M2.CARDDEMO.TRANSACT.BKUP",
+            "member": "0",
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYMNAMES",
+            "raw": "* TRAN-ID,1,16,CH",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* SORT FIELDS=(TRAN-ID,A) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          },
+          {
+            "ddname": "SYSOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SORTOUT",
+            "raw": "DISP=(NEW,CATLG,DELETE), UNIT=SYSDA, DCB=(*.SORTIN), SPACE=(CYL,(1,1),RLSE), DSN=AWS.M2.CARDDEMO.TRANSACT.COMBINED(+1)",
+            "dsn": "AWS.M2.CARDDEMO.TRANSACT.COMBINED",
+            "member": "+1",
+            "disp": "NEW,CATLG,DELETE",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "output"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP10",
+        "exec": "PGM=IDCAMS",
+        "pgm": "IDCAMS",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "TRANSACT",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TRANSACT.COMBINED(+1)",
+            "dsn": "AWS.M2.CARDDEMO.TRANSACT.COMBINED",
+            "member": "+1",
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "TRANVSAM",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* REPRO INFILE(TRANSACT) OUTFILE(TRANVSAM) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      }
+    ]
+  },
+  "programs": {},
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

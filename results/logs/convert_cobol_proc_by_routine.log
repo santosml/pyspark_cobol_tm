@@ -1,0 +1,97 @@
+[INFO] Lendo arquivos...
+[INFO] Extraindo FILE SECTION + WORKING-STORAGE...
+[INFO] Extraindo rotinas COBOL (Procedure Division)...
+[OK] Rotinas detectadas: 13
+[INFO] Inicializando LLMRouter (task='convert')...
+[RAG] Carregando exemplos da knowledge_base/commands...
+
+Preparando rotina (1/13) Rotina: 0210-SOMA-CREDITO
+[CONVERT] (1/13) Rotina: 0210-SOMA-CREDITO
+[RAG] - 1 comandos detectados: ADD
+[RAG] - 0 padrões heurísticos detectados: (nenhum)
+   [OK] Rotina 0210-SOMA-CREDITO convertida.
+
+Preparando rotina (2/13) Rotina: 0400-WRITE-OUTFL1
+[CONVERT] (2/13) Rotina: 0400-WRITE-OUTFL1
+[RAG] - 3 comandos detectados: ADD, MOVE, WRITE
+[RAG] - 1 padrões heurísticos detectados: RECORD_AGGREGATION(1)
+   [OK] Rotina 0400-WRITE-OUTFL1 convertida.
+
+Preparando rotina (3/13) Rotina: 0400-WRITE-OUTFL2
+[CONVERT] (3/13) Rotina: 0400-WRITE-OUTFL2
+[RAG] - 3 comandos detectados: ADD, MOVE, WRITE
+[RAG] - 1 padrões heurísticos detectados: RECORD_AGGREGATION(1)
+   [OK] Rotina 0400-WRITE-OUTFL2 convertida.
+
+Preparando rotina (4/13) Rotina: 0400-WRITE-OUTFL3
+[CONVERT] (4/13) Rotina: 0400-WRITE-OUTFL3
+[RAG] - 3 comandos detectados: ADD, MOVE, WRITE
+[RAG] - 1 padrões heurísticos detectados: RECORD_AGGREGATION(1)
+   [OK] Rotina 0400-WRITE-OUTFL3 convertida.
+
+Preparando rotina (5/13) Rotina: 9999-CLOSE-OUT
+[CONVERT] (5/13) Rotina: 9999-CLOSE-OUT
+[RAG] - 1 comandos detectados: CLOSE
+[RAG] - 0 padrões heurísticos detectados: (nenhum)
+[Bedrock/Anthropic] Throttling. Retry em 0.9s...
+   [OK] Rotina 9999-CLOSE-OUT convertida.
+
+Preparando rotina (6/13) Rotina: READ-FILE01
+[CONVERT] (6/13) Rotina: READ-FILE01
+[RAG] - 4 comandos detectados: ADD, READ, MOVE, IF
+[RAG] - 3 padrões heurísticos detectados: STATEFUL-CURSOR(2), BATCH_TO_DATAFRAME(1), RECORD_AGGREGATION(1)
+   [OK] Rotina READ-FILE01 convertida.
+
+Preparando rotina (7/13) Rotina: READ-FILE02
+[CONVERT] (7/13) Rotina: READ-FILE02
+[RAG] - 4 comandos detectados: ADD, READ, MOVE, IF
+[RAG] - 3 padrões heurísticos detectados: STATEFUL-CURSOR(2), BATCH_TO_DATAFRAME(1), RECORD_AGGREGATION(1)
+[Bedrock/Anthropic] Throttling. Retry em 1.0s...
+   [OK] Rotina READ-FILE02 convertida.
+
+Preparando rotina (8/13) Rotina: READ-FILE03
+[CONVERT] (8/13) Rotina: READ-FILE03
+[RAG] - 4 comandos detectados: ADD, READ, MOVE, IF
+[RAG] - 3 padrões heurísticos detectados: STATEFUL-CURSOR(2), BATCH_TO_DATAFRAME(1), RECORD_AGGREGATION(1)
+   [OK] Rotina READ-FILE03 convertida.
+
+Preparando rotina (9/13) Rotina: 0100-INITIALIZE
+[CONVERT] (9/13) Rotina: 0100-INITIALIZE
+[RAG] - 3 comandos detectados: PERFORM, READ, OPEN
+[RAG] - 0 padrões heurísticos detectados: (nenhum)
+   [OK] Rotina 0100-INITIALIZE convertida.
+
+Preparando rotina (10/13) Rotina: 0220-SUBTRAI-DEBITO
+[CONVERT] (10/13) Rotina: 0220-SUBTRAI-DEBITO
+[RAG] - 4 comandos detectados: DISPLAY, PERFORM, SUBTRACT, WRITE
+[RAG] - 0 padrões heurísticos detectados: (nenhum)
+   [OK] Rotina 0220-SUBTRAI-DEBITO convertida.
+
+Preparando rotina (11/13) Rotina: 0230-CHECA-SALDO
+[CONVERT] (11/13) Rotina: 0230-CHECA-SALDO
+[RAG] - 3 comandos detectados: PERFORM, IF, WRITE
+[RAG] - 0 padrões heurísticos detectados: (nenhum)
+[Bedrock/Anthropic] Throttling. Retry em 1.0s...
+   [OK] Rotina 0230-CHECA-SALDO convertida.
+
+Preparando rotina (12/13) Rotina: 0200-PROCESS
+[CONVERT] (12/13) Rotina: 0200-PROCESS
+[RAG] - 7 comandos detectados: ADD, PERFORM, READ, STOP RUN, WRITE, DISPLAY, IF
+[RAG] - 1 padrões heurísticos detectados: RECORD_AGGREGATION(1)
+   [OK] Rotina 0200-PROCESS convertida.
+
+Preparando rotina (13/13) Rotina: 0000-MAIN
+[CONVERT] (13/13) Rotina: 0000-MAIN
+[RAG] - 7 comandos detectados: PERFORM, INITIALIZE, CLOSE, READ, STOP RUN, WRITE, DISPLAY
+[RAG] - 0 padrões heurísticos detectados: (nenhum)
+[Bedrock/Anthropic] Throttling. Retry em 1.0s...
+[Bedrock/Anthropic] Throttling. Retry em 1.6s...
+[Bedrock/Anthropic] Throttling. Retry em 3.3s...
+[Bedrock/Anthropic] Throttling. Retry em 6.8s...
+   [OK] Rotina 0000-MAIN convertida.
+[OK] Código PySpark por rotinas salvo em: results\py\program2_COBOL_clean_PROC_pyspark.py
+[OK] Relatório salvo em: results\md\proc_to_pyspark_report.md
+[INFO] Convertendo Procedure Division principal para função main()...
+[INFO] Rotina principal detectada: 0000-MAIN
+[OK] Função main() gerada com sucesso.
+[CONCLUÍDO] Processamento finalizado.

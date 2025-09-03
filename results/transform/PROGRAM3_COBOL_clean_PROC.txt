@@ -1,0 +1,75 @@
+000050        PROCEDURE DIVISION.                                     
+000051       ******************************************************   
+000052       * THE MAIN PARAGRAPH PERFORMS ALL OTHERS AND IS THE  *   
+000053       * START OF THE PROGRAM LOGIC.                        *   
+000054       ******************************************************   
+000055        0000-MAIN.                                              
+000056                                                                
+000057            PERFORM 0100-INITIALIZE.                            
+000058                                                                
+000059            DISPLAY 'START'                                     
+000060            DISPLAY 'EOF-FILE01 ' EOF-FILE01                    
+000061            PERFORM 0200-PROCESS UNTIL                          
+000062                    EOF-FILE01 EQUAL 'Y'                        
+000063                                                                
+000064            PERFORM 9999-CLOSE-OUT.                             
+000065                                                                
+000066            DISPLAY 'RECORD WRITTEN : ' RECORD-COUNT.     
+000067            STOP RUN.                                     
+000068                                                          
+000069        0100-INITIALIZE.                                  
+000070            OPEN  INPUT FILE01.                           
+000071            OPEN OUTPUT OUTFIL.                           
+000072                                                          
+000073            PERFORM READ-FILE01.                          
+000074                                                          
+000075        0200-PROCESS.                                     
+000076                                                          
+000077            ADD 1 TO RECORD-COUNT-LIMIT                   
+000078            IF RECORD-COUNT-LIMIT GREATER 20              
+000079               DISPLAY 'TRAVA LOOPING'                    
+000080               STOP RUN.                                  
+000081                                                          
+000082            IF       ACCT-BALANCE-FILE01 LESS 2000        
+000083                     MOVE 'TIER5'                         
+000084                       TO CLIE-TIER-OUTFIL                
+000085            ELSE IF  ACCT-BALANCE-FILE01 LESS 4000        
+000086                     MOVE 'TIER4'                         
+000087                       TO CLIE-TIER-OUTFIL                
+000088            ELSE IF  ACCT-BALANCE-FILE01 LESS 6000   
+000089                     MOVE 'TIER3'                    
+000090                       TO CLIE-TIER-OUTFIL           
+000091            ELSE IF  ACCT-BALANCE-FILE01 LESS 8000   
+000092                     MOVE 'TIER2'                    
+000093                       TO CLIE-TIER-OUTFIL           
+000094               ELSE                                  
+000095                     MOVE 'TIER1'                    
+000096                       TO CLIE-TIER-OUTFIL.          
+000097                                                     
+000098            PERFORM 0400-WRITE                       
+000099                                                     
+000100            PERFORM READ-FILE01.                     
+000101                                                     
+000102        READ-FILE01.                                 
+000103                                                     
+000104            IF EOF-FILE01 EQUAL 'N'                  
+000105               READ FILE01                           
+000106               AT END MOVE 'Y' TO EOF-FILE01.        
+000107                                                     
+000108            IF EOF-FILE01 EQUAL 'Y'                  
+000109               MOVE 9999999999                       
+000110                 TO NUM-FILE01                   
+000111            ELSE                                 
+000112               MOVE  FILE01-AREA                 
+000113                 TO  OUTFIL-AREA                 
+000114                ADD 1 TO RECORD-COUNT-READ1.     
+000115                                                 
+000116        0400-WRITE.                              
+000117                                                 
+000118            WRITE OUTFIL-AREA.                   
+000119            ADD 1 TO RECORD-COUNT.               
+000120                                                 
+000121        9999-CLOSE-OUT.                          
+000122            CLOSE FILE01.                        
+000123            CLOSE OUTFIL.                        
+000124

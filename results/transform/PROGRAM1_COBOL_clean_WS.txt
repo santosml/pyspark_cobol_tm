@@ -1,0 +1,41 @@
+000021        FILE SECTION.                                                    
+000022        FD  FILE01                            
+000023            BLOCK CONTAINS 88 RECORDS         
+000024            RECORD CONTAINS 88 CHARACTERS     
+000025            DATA RECORD IS FILE01-AREA.       
+000026        01  FILE01-AREA.                      
+000027            03 NUM-FILE01          PIC X(10). 
+000028            03 FIRST-NAME-FILE01   PIC X(10). 
+000029            03 LAST-NAME-FILE01    PIC X(10). 
+000030            03 ACCT-BALANCE-FILE01 PIC 9(10). 
+000031            03 FILLER              PIC X(48). 
+000032        FD  FILE02                            
+000033            BLOCK CONTAINS 88 RECORDS         
+000034            RECORD CONTAINS 88 CHARACTERS     
+000035            DATA RECORD IS FILE02-AREA.       
+000036        01  FILE02-AREA.                      
+000037            03 NUM-FILE02          PIC X(10). 
+000038            03 FIRST-NAME-FILE02   PIC X(10). 
+000039            03 LAST-NAME-FILE02    PIC X(10). 
+000040            03 ACCT-BALANCE-FILE02 PIC 9(10). 
+000041            03 FILLER              PIC X(48). 
+000042        FD  OUTFIL                            
+000043            BLOCK CONTAINS 88 RECORDS         
+000044            RECORD CONTAINS 88 CHARACTERS                           
+000045            DATA RECORD IS OUTFIL-AREA.                             
+000046        01  OUTFIL-AREA.                                            
+000047            03 NUM-OUTFIL          PIC X(10).                       
+000048            03 FIRST-NAME-OUTFIL   PIC X(10).                       
+000049            03 LAST-NAME-OUTFIL    PIC X(10).                       
+000050            03 ACCT-BALANCE-OUTFIL PIC 9(10).                       
+000051            03 FILLER              PIC X(48).
+000052        WORKING-STORAGE SECTION.                                    
+000053        77  RECORD-COUNT           PIC 9(2) VALUE 0.                
+000054        77  RECORD-COUNT-READ1     PIC 9(2) VALUE 0.                
+000055        77  RECORD-COUNT-READ2     PIC 9(2) VALUE 0.                
+000056        77  RECORD-COUNT-LIMIT     PIC 9(2) VALUE 0.                
+000057            01 WS-CONTROLS.                                         
+000058                05 WS-FILE-STATUS         PIC X(2) VALUE SPACES.    
+000059                05 EOF-FILE01             PIC X VALUE 'N'.          
+000060                05 EOF-FILE02             PIC X VALUE 'N'.          
+000061

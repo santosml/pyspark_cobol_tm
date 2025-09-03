@@ -1,0 +1,31 @@
+000019        FILE SECTION.                                                    
+000020        FD  FILE01                                                       
+000021            BLOCK CONTAINS 88 RECORDS                                    
+000022            RECORD CONTAINS 88 CHARACTERS             
+000023            DATA RECORD IS FILE01-AREA.               
+000024        01  FILE01-AREA.                              
+000025            03 NUM-FILE01          PIC X(10).         
+000026            03 FIRST-NAME-FILE01   PIC X(10).         
+000027            03 LAST-NAME-FILE01    PIC X(10).         
+000028            03 ACCT-BALANCE-FILE01 PIC 9(10).         
+000029            03 FILLER              PIC X(48).         
+000030        FD  OUTFIL                                    
+000031            BLOCK CONTAINS 88 RECORDS                 
+000032            RECORD CONTAINS 88 CHARACTERS             
+000033            DATA RECORD IS OUTFIL-AREA.               
+000034        01  OUTFIL-AREA.                              
+000035            03 NUM-OUTFIL          PIC X(10).         
+000036            03 FIRST-NAME-OUTFIL   PIC X(10).         
+000037            03 LAST-NAME-OUTFIL    PIC X(10).         
+000038            03 ACCT-BALANCE-OUTFIL PIC 9(10).         
+000039            03 CLIE-TIER-OUTFIL    PIC X(05).         
+000040            03 FILLER              PIC X(43).
+000041        WORKING-STORAGE SECTION.                      
+000042        77  RECORD-COUNT           PIC 9(2) VALUE 0.  
+000043        77  RECORD-COUNT-READ1     PIC 9(2) VALUE 0.  
+000044        77  RECORD-COUNT-READ2     PIC 9(2) VALUE 0.            
+000045        77  RECORD-COUNT-LIMIT     PIC 9(2) VALUE 0.            
+000046            01 WS-CONTROLS.                                     
+000047                05 WS-FILE-STATUS         PIC X(2) VALUE SPACES.
+000048                05 EOF-FILE01             PIC X VALUE 'N'.      
+000049

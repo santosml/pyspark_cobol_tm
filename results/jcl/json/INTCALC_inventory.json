@@ -1,0 +1,139 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "STEP15",
+        "exec": "PGM=CBACT04C,PARM='2022071800'",
+        "pgm": "CBACT04C",
+        "proc": null,
+        "parm": "'2022071800'",
+        "dd": [
+          {
+            "ddname": "STEPLIB",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.LOADLIB",
+            "dsn": "AWS.M2.CARDDEMO.LOADLIB",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "TCATBALF",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TCATBALF.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.TCATBALF.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "XREFFILE",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "XREFFIL1",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.CARDXREF.VSAM.AIX.PATH",
+            "dsn": "AWS.M2.CARDDEMO.CARDXREF.VSAM.AIX.PATH",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "ACCTFILE",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "DISCGRP",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.DISCGRP.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.DISCGRP.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "TRANSACT",
+            "raw": "DISP=(NEW,CATLG,DELETE), UNIT=SYSDA, DCB=(RECFM=F,LRECL=350,BLKSIZE=0), SPACE=(CYL,(1,1),RLSE), DSN=AWS.M2.CARDDEMO.SYSTRAN(+1)",
+            "dsn": "AWS.M2.CARDDEMO.SYSTRAN",
+            "member": "+1",
+            "disp": "NEW,CATLG,DELETE",
+            "recfm": "F",
+            "lrecl": "350",
+            "sysin_inline": null,
+            "class": "output"
+          }
+        ],
+        "type": "COBOL",
+        "cobol_programs": [
+          "CBACT04C"
+        ]
+      }
+    ]
+  },
+  "programs": {
+    "CBACT04C": {
+      "found": true,
+      "path": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl\\CBACT04C.cbl",
+      "copy": [],
+      "sql_include": [],
+      "reads": [],
+      "writes": []
+    }
+  },
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

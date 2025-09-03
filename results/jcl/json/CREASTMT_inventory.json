@@ -1,0 +1,326 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "DELDEF01",
+        "exec": "PGM=IDCAMS",
+        "pgm": "IDCAMS",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* DELETE    AWS.M2.CARDDEMO.TRXFL.SEQ DELETE    AWS.M2.CARDDEMO.TRXFL.VSAM.KSDS                     - CLUSTER SET       MAXCC = 0 DEFINE    CLUSTER  (NAME(AWS.M2.CARDDEMO.TRXFL.VSAM.KSDS)     - KEYS(32 0)                                - VOLUMES(TSU023)                           - RECORDSIZE(350 350)                       - SHAREOPTIONS(2 3)                         - ERASE                                     - INDEXED                                   - CYL(1 5))                                 - DATA      (NAME(AWS.M2.CARDDEMO.TRXFL.DATA)         - CISZ(4096))                               - INDEX     (NAME(AWS.M2.CARDDEMO.TRXFL.INDEX)) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP010",
+        "exec": "PGM=SORT",
+        "pgm": "SORT",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SORTIN",
+            "raw": "DISP=SHR,DSN=AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SORTOUT",
+            "raw": "DSN=AWS.M2.CARDDEMO.TRXFL.SEQ, DISP=(NEW,CATLG,DELETE),UNIT=SYSDA, DCB=(LRECL=350,BLKSIZE=3500,RECFM=FB), SPACE=(CYL,(1,1),RLSE)",
+            "dsn": "AWS.M2.CARDDEMO.TRXFL.SEQ",
+            "member": null,
+            "disp": "NEW,CATLG,DELETE",
+            "recfm": "FB",
+            "lrecl": "350",
+            "sysin_inline": null,
+            "class": "output"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* SORT FIELDS=(263,16,CH,A,1,16,CH,A) OUTREC FIELDS=(1:263,16,17:1,262,279:279,50) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP020",
+        "exec": "PGM=IDCAMS,COND=(0,NE)",
+        "pgm": "IDCAMS",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "INFILE",
+            "raw": "DISP=SHR,DSN=AWS.M2.CARDDEMO.TRXFL.SEQ",
+            "dsn": "AWS.M2.CARDDEMO.TRXFL.SEQ",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "OUTFILE",
+            "raw": "DISP=SHR,DSN=AWS.M2.CARDDEMO.TRXFL.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.TRXFL.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSIN",
+            "raw": "* REPRO INFILE(INFILE) OUTFILE(OUTFILE) /*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "other"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP030",
+        "exec": "PGM=IEFBR14,COND=(0,NE)",
+        "pgm": "IEFBR14",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "HTMLFILE",
+            "raw": "DISP=(MOD,DELETE,DELETE), UNIT=SYSDA, DCB=(LRECL=80,BLKSIZE=3200,RECFM=FB), SPACE=(CYL,(1,1),RLSE), DSN=AWS.M2.CARDDEMO.STATEMNT.HTML",
+            "dsn": "AWS.M2.CARDDEMO.STATEMNT.HTML",
+            "member": null,
+            "disp": "MOD,DELETE,DELETE",
+            "recfm": "FB",
+            "lrecl": "80",
+            "sysin_inline": null,
+            "class": "output"
+          },
+          {
+            "ddname": "STMTFILE",
+            "raw": "DISP=(MOD,DELETE,DELETE), DCB=(LRECL=80,BLKSIZE=8000,RECFM=FB), SPACE=(CYL,(1,1),RLSE), DSN=AWS.M2.CARDDEMO.STATEMNT.PS",
+            "dsn": "AWS.M2.CARDDEMO.STATEMNT.PS",
+            "member": null,
+            "disp": "MOD,DELETE,DELETE",
+            "recfm": "FB",
+            "lrecl": "80",
+            "sysin_inline": null,
+            "class": "output"
+          }
+        ],
+        "type": "UTILITY",
+        "cobol_programs": []
+      },
+      {
+        "step": "STEP040",
+        "exec": "PGM=CBSTM03A,COND=(0,NE)",
+        "pgm": "CBSTM03A",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "STEPLIB",
+            "raw": "DISP=SHR,DSN=AWS.M2.CARDDEMO.LOADLIB",
+            "dsn": "AWS.M2.CARDDEMO.LOADLIB",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "TRNXFILE",
+            "raw": "DISP=SHR,DSN=AWS.M2.CARDDEMO.TRXFL.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.TRXFL.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "XREFFILE",
+            "raw": "DISP=SHR,DSN=AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "ACCTFILE",
+            "raw": "DISP=SHR,DSN=AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "CUSTFILE",
+            "raw": "DISP=SHR,DSN=AWS.M2.CARDDEMO.CUSTDATA.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.CUSTDATA.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "STMTFILE",
+            "raw": "DISP=(NEW,CATLG,DELETE), UNIT=SYSDA, DCB=(LRECL=80,BLKSIZE=8000,RECFM=FB), SPACE=(CYL,(1,1),RLSE), 00,RECFM=FB), ATA.VSAM.KSDS DSN=AWS.M2.CARDDEMO.STATEMNT.PS",
+            "dsn": "AWS.M2.CARDDEMO.STATEMNT.PS",
+            "member": null,
+            "disp": "NEW,CATLG,DELETE",
+            "recfm": "FB",
+            "lrecl": "80",
+            "sysin_inline": null,
+            "class": "output"
+          },
+          {
+            "ddname": "HTMLFILE",
+            "raw": "DISP=(NEW,CATLG,DELETE), UNIT=SYSDA, DCB=(LRECL=100,BLKSIZE=800,RECFM=FB), SPACE=(CYL,(1,1),RLSE), DSN=AWS.M2.CARDDEMO.STATEMNT.HTML",
+            "dsn": "AWS.M2.CARDDEMO.STATEMNT.HTML",
+            "member": null,
+            "disp": "NEW,CATLG,DELETE",
+            "recfm": "FB",
+            "lrecl": "100",
+            "sysin_inline": null,
+            "class": "output"
+          }
+        ],
+        "type": "COBOL",
+        "cobol_programs": [
+          "CBSTM03A"
+        ]
+      }
+    ]
+  },
+  "programs": {
+    "CBSTM03A": {
+      "found": true,
+      "path": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl\\CBSTM03A.cbl",
+      "copy": [],
+      "sql_include": [],
+      "reads": [],
+      "writes": []
+    }
+  },
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

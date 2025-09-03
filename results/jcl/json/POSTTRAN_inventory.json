@@ -1,0 +1,139 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "STEP15",
+        "exec": "PGM=CBTRN02C",
+        "pgm": "CBTRN02C",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "STEPLIB",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.LOADLIB",
+            "dsn": "AWS.M2.CARDDEMO.LOADLIB",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "TRANFILE",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.TRANSACT.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "DALYTRAN",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.DALYTRAN.PS",
+            "dsn": "AWS.M2.CARDDEMO.DALYTRAN.PS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "XREFFILE",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.CARDXREF.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "DALYREJS",
+            "raw": "DISP=(NEW,CATLG,DELETE), UNIT=SYSDA, DCB=(RECFM=F,LRECL=430,BLKSIZE=0), SPACE=(CYL,(1,1),RLSE), DSN=AWS.M2.CARDDEMO.DALYREJS(+1)",
+            "dsn": "AWS.M2.CARDDEMO.DALYREJS",
+            "member": "+1",
+            "disp": "NEW,CATLG,DELETE",
+            "recfm": "F",
+            "lrecl": "430",
+            "sysin_inline": null,
+            "class": "output"
+          },
+          {
+            "ddname": "ACCTFILE",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "TCATBALF",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.TCATBALF.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.TCATBALF.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          }
+        ],
+        "type": "COBOL",
+        "cobol_programs": [
+          "CBTRN02C"
+        ]
+      }
+    ]
+  },
+  "programs": {
+    "CBTRN02C": {
+      "found": true,
+      "path": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl\\CBTRN02C.cbl",
+      "copy": [],
+      "sql_include": [],
+      "reads": [],
+      "writes": []
+    }
+  },
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}

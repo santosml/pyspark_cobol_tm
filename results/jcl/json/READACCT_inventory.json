@@ -1,0 +1,84 @@
+{
+  "jcl": {
+    "steps": [
+      {
+        "step": "STEP05",
+        "exec": "PGM=CBACT01C",
+        "pgm": "CBACT01C",
+        "proc": null,
+        "parm": null,
+        "dd": [
+          {
+            "ddname": "STEPLIB",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.LOADLIB",
+            "dsn": "AWS.M2.CARDDEMO.LOADLIB",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "ACCTFILE",
+            "raw": "DISP=SHR, DSN=AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "dsn": "AWS.M2.CARDDEMO.ACCTDATA.VSAM.KSDS",
+            "member": null,
+            "disp": "SHR",
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "input"
+          },
+          {
+            "ddname": "SYSOUT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          },
+          {
+            "ddname": "SYSPRINT",
+            "raw": "SYSOUT=*",
+            "dsn": null,
+            "member": null,
+            "disp": null,
+            "recfm": null,
+            "lrecl": null,
+            "sysin_inline": null,
+            "class": "log"
+          }
+        ],
+        "type": "COBOL",
+        "cobol_programs": [
+          "CBACT01C"
+        ]
+      }
+    ]
+  },
+  "programs": {
+    "CBACT01C": {
+      "found": true,
+      "path": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl\\CBACT01C.cbl",
+      "copy": [],
+      "sql_include": [],
+      "reads": [],
+      "writes": []
+    }
+  },
+  "paths": {
+    "jcl": "C:\\COBOL Files\\batch2cloud_v3\\files\\jcl",
+    "cobol": "C:\\COBOL Files\\batch2cloud_v3\\files\\cbl",
+    "cpy": "C:\\COBOL Files\\batch2cloud_v3\\files\\cpy",
+    "schema": "C:\\COBOL Files\\batch2cloud_v3\\files\\schema",
+    "sort": "C:\\COBOL Files\\batch2cloud_v3\\files\\sort"
+  },
+  "missing": {
+    "copy": [],
+    "schema": []
+  }
+}
